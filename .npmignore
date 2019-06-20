@@ -1,0 +1,7 @@
+src
+test
+dist/node_modules
+dist/packag*.json
+.*
+*.tgz
+*.log

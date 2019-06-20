@@ -1,0 +1,114 @@
+{% extends "../../../views/templates/layout.njk" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <h1 class="govuk-heading-xl">
+        Sheffield Magistrates Court
+      </h1>
+
+      <p class="govuk-body">Wednesday, 24th July 2019</p>
+
+      {% from "table/macro.njk" import govukTable %}
+
+      {{ govukTable({
+        firstCellIsHeader: false,
+        head: [
+          {
+            text: "Name",
+            classes: 'govuk-!-width-one-quarter'
+          },
+          {
+            text: "Offence",
+            classes: 'govuk-!-width-one-quarter'
+          },
+          {
+            text: "Status",
+            classes: 'govuk-!-width-one-quarter'
+
+          },
+          {
+            text: "Marker",
+            classes: 'govuk-!-width-one-quarter'
+
+          },
+          {
+            text: "Appearance",
+            classes: 'govuk-!-width-one-quarter'
+
+          },
+          {
+            text: "Court",
+            classes: 'govuk-!-width-one-quarter'
+
+          },
+          {
+            text: "Select",
+            classes: 'govuk-!-width-one-quarter'
+
+          }
+        ],
+        rows: [
+          [
+            {
+              html: '<a href="/offender">Smith, John</a>'
+            },
+            {
+              text: "Assault by beating"
+            },
+            {
+              html: '<div class="status-current">CURRENT</div>'
+            },
+            {
+              text: "Domestic violence"
+            },
+            {
+              text: "1"
+            },
+            {
+              text: "2"
+            },
+            {
+              html: '<div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="offender" name="offender" type="checkbox" value="selected_offender">
+        <label class="govuk-label govuk-checkboxes__label" for="offender">
+        </label> </div>'
+            }
+          ],
+          [
+            {
+              html: '<a href=/offender>Jones, Paul</a>'
+            },
+            {
+              text: "Robbery of goods over £500"
+            },
+            {
+              html: '<div class="status-no-match">NO MATCH</div>'
+            },
+            {
+              text: "Violent"
+            },
+            {
+              text: "1"
+            },
+            {
+              text: "2"
+            },
+            {
+              html: '<div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="offender" onclick="checkOnlyOne(this.value);" name="offender" type="checkbox" value="selected_offender">
+        <label class="govuk-label govuk-checkboxes__label" for="offender">
+        </label> </div>'
+            }
+          ]
+        ]
+      }) }}
+
+
+
+
+
+    </div>
+  </div>
+{% endblock %}

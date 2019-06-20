@@ -1,0 +1,33 @@
+@import "partials/govuk-frontend";
+
+.status-current {
+  border: 2px solid green;
+  width: 60px;
+  height: 20px;
+  color: green;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: center;
+  padding-top:5px;
+}
+
+.status-known {
+  border: 2px solid yellow;
+  color: yellow;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: center;
+  padding-top:5px;
+}
+
+.status-no-match {
+  border: 2px solid red;
+  width: 60px;
+  height: 20px;
+  color: red;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: center;
+  padding-top:5px;
+
+}

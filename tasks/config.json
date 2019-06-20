@@ -1,0 +1,39 @@
+{
+  "clean": {
+    "src": [
+      "./dist/*",
+      "!./dist/packag*.json",
+      "!./dist/node_modules"
+    ]
+  },
+  "copy": {
+    "src": [
+      "./packag*.json",
+      "./src/**/*.*"
+    ],
+    "dest": "./dist"
+  },
+  "javascripts": {
+    "src": "./src/public/assets/javascripts/*.mjs",
+    "dest": "./dist/public/assets/javascripts"
+  },
+  "stylesheets": {
+    "src": [
+      "./node_modules/govuk-frontend/all.scss",
+      "./node_modules/govuk-frontend/all-ie8.scss"
+    ],
+    "src": "./src/public/assets/stylesheets/*.scss",
+    "dest": "./dist/public/assets/stylesheets"
+  },
+  "serve": {
+    "ext": "mjs,json,njk,yml",
+    "ignore": "./dist/public",
+    "proxy": {
+      "notify": false,
+      "open": false,
+      "port": 3001,
+      "proxy": "localhost:3000"
+    },
+    "watch": "./dist"
+  }
+}

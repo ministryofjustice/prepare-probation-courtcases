@@ -1,0 +1,81 @@
+{
+  "name": "prepare-probation-courtcases",
+  "version": "0.1.0",
+  "description": "Node app for court",
+  "main": "dist/server.mjs",
+  "scripts": {
+    "test": "npm run test:dependencies && npm run test:audit && npm run test:lint",
+    "test:audit": "check-audit --registry=https://registry.npmjs.org",
+    "test:dependencies": "npm ls --depth=0",
+    "test:lint": "eslint ./src --ext .js,.mjs",
+    "prebuild": "mkdir -p ./dist && cp -Rp packag*.json ./dist && npm ci --production --prefix ./dist",
+    "build": "gulp",
+    "prepackage": "npm test && npm run build",
+    "package": "tar -czf dist-$npm_package_version.tgz ./dist",
+    "prepublishOnly": "npm run prepackage",
+    "start": "cd ./dist && node --experimental-modules server.mjs",
+    "dev": "npm run prebuild && gulp dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=12.3.1 <13.0.0"
+  },
+  "author": "Katie Cawthorne",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-member-expression-literals": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/plugin-transform-property-literals": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.6.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
+    "browser-sync": "^2.26.7",
+    "core-js": "^3.1.3",
+    "del": "^4.1.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "esm": "^3.2.25",
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-preservetime": "^1.2.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "html5shiv": "^3.7.3",
+    "nodemon": "^1.19.1",
+    "npm-audit-resolver": "^1.5.0",
+    "oldie": "^1.3.0",
+    "postcss-csso": "^3.0.0",
+    "terser-webpack-plugin": "^1.3.0",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^4.33.0",
+    "webpack-stream": "^5.2.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "client-sessions": "^0.8.0",
+    "deepmerge": "^3.2.0",
+    "express": "^4.17.1",
+    "govuk-frontend": "^2.12.0",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
+    "nunjucks": "^3.2.0",
+    "prettier": "^1.18.2"
+  },
+  "browserslist": [
+    ">0.1%",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Edge versions",
+    "last 2 Samsung versions",
+    "Safari >= 9",
+    "ie 8-11",
+    "iOS >= 9"
+  ]
+}
