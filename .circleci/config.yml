@@ -43,9 +43,6 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Linter check
-          command: npm run lint
-      - run:
           command: |
             npm run build
             DATE=$(date '+%Y-%m-%d')
