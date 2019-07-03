@@ -48,12 +48,10 @@ jobs:
             DATE=$(date '+%Y-%m-%d')
             export BUILD_NUMBER=${DATE}.${CIRCLE_BUILD_NUM}
             export GIT_REF="$CIRCLE_SHA1"
-            npm run record-build-info
       - persist_to_workspace:
           root: .
           paths:
             - node_modules
-            - build-info.json
             - public/assets/stylesheets
 
   test:
