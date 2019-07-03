@@ -14,7 +14,8 @@
     "package": "tar -czf dist-$npm_package_version.tgz ./dist",
     "prepublishOnly": "npm run prepackage",
     "start": "cd ./dist && node --experimental-modules server.mjs",
-    "dev": "npm run prebuild && gulp dev"
+    "dev": "npm run prebuild && gulp dev",
+    "record-build-info": "node ./bin/record-build-info"
   },
   "repository": {
     "type": "git",
