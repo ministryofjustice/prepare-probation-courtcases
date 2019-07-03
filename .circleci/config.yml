@@ -85,27 +85,29 @@ jobs:
             docker push "${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:latest"
             docker push "${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:${CIRCLE_SHA1}"
 
-    deploy_dev:
-      <<: *deploy_container_config
-      steps:
-        - checkout
-        - setup_remote_docker:
-            docker_layer_caching: true
-        - attach_workspace:
-            at: ~/app
-        - run:
-            name: Kubectl deployment dev setup
-            command: |
-              $(aws ecr get-login --region eu-west-2 --no-include-email)
-              setup-kube-auth
-              kubectl config use-context dev
-        - deploy:
-            name: Deploy to dev
-            command: |
-              kubectl set image -f ./kube/deployment.yaml prepare-probation-courtcases=${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:${CIRCLE_SHA1} --local -o yaml \
-              | kubectl apply -f -
-              kubectl apply \
-                -f ./kube/service.yaml
+  deploy_dev:
+    <<: *deploy_container_config
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - attach_workspace:
+          at: ~/app
+      - run:
+          name: Kubectl deployment dev setup
+          command: |
+            $(aws ecr get-login --region eu-west-2 --no-include-email)
+            setup-kube-auth
+            kubectl config use-context dev
+      - deploy:
+          name: Deploy to dev
+          command: |
+            kubectl set image -f ./kubectl_deploy/deployment.yaml prepare-probation-courtcases=${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:${CIRCLE_SHA1} --local -o yaml \
+            | kubectl apply -f -
+            kubectl apply \
+              -f ./kubectl_deploy/service.yaml
+            kubectl apply \
+              -f ./kubectl_deploy/ingress.yaml
 
 
 workflows:
