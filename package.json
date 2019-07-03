@@ -4,7 +4,7 @@
   "description": "Node app for court",
   "main": "dist/server.mjs",
   "scripts": {
-    "test": "npm run test:dependencies && npm run test:audit && npm run test:lint",
+    "test": "npm run test:dependencies && npm run test:audit",
     "test:audit": "check-audit --registry=https://registry.npmjs.org",
     "test:dependencies": "npm ls --depth=0",
     "test:lint": "eslint ./src --ext .js,.mjs",
