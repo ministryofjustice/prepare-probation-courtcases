@@ -80,10 +80,10 @@ jobs:
           command: |
             login="$(aws ecr get-login --region eu-west-2 --no-include-email)"
             ${login}
-            docker build -t ${ECR_ENDPOINT}/probation-services/court-list-service:${CIRCLE_SHA1} .
-            docker tag ${ECR_ENDPOINT}/probation-services/court-list-service:${CIRCLE_SHA1} ${ECR_ENDPOINT}/probation-services/court-list-service:latest
-            docker push "${ECR_ENDPOINT}/probation-services/court-list-service:latest"
-            docker push "${ECR_ENDPOINT}/probation-services/court-list-service:${CIRCLE_SHA1}"
+            docker build -t ${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:${CIRCLE_SHA1} .
+            docker tag ${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:${CIRCLE_SHA1} ${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:latest
+            docker push "${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:latest"
+            docker push "${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:${CIRCLE_SHA1}"
 
     deploy_dev:
       <<: *deploy_container_config
@@ -102,7 +102,7 @@ jobs:
         - deploy:
             name: Deploy to dev
             command: |
-              kubectl set image -f ./kube/deployment.yaml court-list-service=${ECR_ENDPOINT}/probation-services/court-list-service:${CIRCLE_SHA1} --local -o yaml \
+              kubectl set image -f ./kube/deployment.yaml prepare-probation-courtcases=${ECR_ENDPOINT}/probation-services/prepare-probation-courtcases:${CIRCLE_SHA1} --local -o yaml \
               | kubectl apply -f -
               kubectl apply \
                 -f ./kube/service.yaml
