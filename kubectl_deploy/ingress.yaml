@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prepare-probation-courtcases
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+        - prepare-probation-courtcases.apps.live-1.cloud-platform.service.justice.gov.uk
+  rules:
+    - host: prepare-probation-courtcases.apps.live-1.cloud-platform.service.justice.gov.uk
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: prepare-probation-courtcases
+              servicePort: 8000

@@ -12,7 +12,7 @@ module.exports = {
           "./src/public/**/*",
           "./tasks/**/*",
           "./gulpfile.esm.js",
-          "./webpack.config.mjs",
+          ".config.mjs.mjs",
         ],
       },
     ],

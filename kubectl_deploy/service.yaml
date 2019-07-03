@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: prepare-probation-courtcases
+spec:
+  selector:
+    app: prepare-probation-courtcases
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 3000
+  type: NodePort
