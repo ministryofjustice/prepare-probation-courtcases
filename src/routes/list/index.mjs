@@ -5,7 +5,7 @@ const router = new express.Router();
 
 // Home page
 router.get('/', async (req, res) => {
-  res.render('home/views/home');
+  res.render('list/views/list');
 });
 
 // Export as router
