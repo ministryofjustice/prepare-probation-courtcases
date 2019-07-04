@@ -1,6 +1,7 @@
+import { config } from './config.mjs';
 import app from './index.mjs';
 import * as routes from './routes/index.mjs';
-import { config } from './config.mjs';
+// eslint-disable-next-line import/no-unresolved
 
 // Add top-level routes
 app.use(routes.list);
