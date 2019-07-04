@@ -14,6 +14,7 @@ app.use('/assets', middleware.assets);
 app.use(middleware.static);
 app.use(middleware.bodyParser);
 app.use(middleware.cookieSession);
+app.use(middleware.logger);
 
 // Export server
 export default app;
