@@ -19,8 +19,7 @@
   },
   "stylesheets": {
     "src": [
-      "./node_modules/govuk-frontend/all.scss",
-      "./node_modules/govuk-frontend/all-ie8.scss"
+      "./node_modules/govuk-frontend/all.scss"
     ],
     "src": "./src/public/assets/stylesheets/*.scss",
     "dest": "./dist/public/assets/stylesheets"

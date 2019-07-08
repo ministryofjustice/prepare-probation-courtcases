@@ -43,10 +43,6 @@ export default (config, gulp) => {
       csso(options.csso),
     ]))
 
-    // Optimise for IE8 (optional)
-    .pipe(gulpif(/-ie8.css$/, postcss([
-      oldie(),
-    ])))
 
     // Write to files
     .pipe(sourcemaps.write('.'))

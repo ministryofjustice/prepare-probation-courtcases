@@ -34,15 +34,12 @@ export default {
       sourceMap: true,
       terserOptions: {
         compress: {
-          ie8: true,
+          ie8: false,
           warnings: false,
-        },
-        mangle: {
-          ie8: true,
         },
         output: {
           comments: false,
-          ie8: true,
+          ie8: false,
         },
       },
     })],

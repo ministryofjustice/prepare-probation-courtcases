@@ -1,24 +1,29 @@
 module.exports = {
-  extends: 'airbnb-base',
+  env:{
+    "browser": true,
+    "node": true,
+    "mocha":true
+  },
+  extends: "airbnb-base",
   parser: 'babel-eslint',
   rules: {
-    'env':{
-      'mocha':true
-    },
-    'import/extensions': [
-      '.js',
-      '.mjs',
-    ],
-    'import/no-extraneous-dependencies': [
-      'error', {
-        'devDependencies': [
-          "./src/public/**/*",
-          "./tasks/**/*",
-          "./gulpfile.esm.js",
-          ".config.mjs.mjs",
-        ],
-      },
-    ],
+      "no-use-before-define": 0,
+      "semi": 0,
+      "comma-dangle": ["error", "always-multiline"],
+      'import/extensions': [
+        '.js',
+        '.mjs',
+      ],
+      'import/no-extraneous-dependencies': [
+        'error', {
+          'devDependencies': [
+            "./src/public/**/*",
+            "./tasks/**/*",
+            "./gulpfile.esm.js",
+            ".config.mjs.mjs",
+          ],
+        },
+      ],
     'class-methods-use-this': [
       'off',
     ],

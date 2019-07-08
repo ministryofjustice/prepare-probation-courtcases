@@ -12,7 +12,7 @@ export default config => () => new Promise((resolve) => {
   });
 
   // Browser proxy for development
-  const proxy = browserSync(config.proxy);
+  const proxy = browserSync(config.proxy)
 
   // Reload browser on server restart
   server.on('start', proxy.reload);

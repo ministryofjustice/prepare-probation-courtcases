@@ -6,9 +6,8 @@ import * as routes from './routes/index.mjs';
 // Add top-level routes
 app.use(routes.list);
 
-
 // Add nested routes
-app.use('/offender', routes.offender);
+app.use('/offender', routes.offender)
 
 // Start on port
 app.listen(config.port);
