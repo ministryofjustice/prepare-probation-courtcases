@@ -4,7 +4,7 @@ const logger = bunyanLog();
 
 // const logger = require('../../log.js');
 
-const log = logger.requestLogger();
+const middleware = logger.requestLogger();
 
-// Export as logger
-export default (req, res, next) => log(req, res, next);
+// Export as middleware
+export default (req, res, next) => middleware(req, res, next);

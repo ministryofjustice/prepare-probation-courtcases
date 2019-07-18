@@ -1,4 +1,5 @@
 import express from 'express';
+import passport from 'passport';
 import * as adapters from './adapters/index.mjs';
 import * as middleware from './middleware/index.mjs';
 
@@ -15,6 +16,10 @@ app.use(middleware.static);
 app.use(middleware.bodyParser);
 app.use(middleware.cookieSession);
 app.use(middleware.logger);
+// app.use(middleware.passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Export server
 export default app;

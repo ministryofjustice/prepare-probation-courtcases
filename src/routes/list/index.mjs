@@ -1,4 +1,5 @@
 import express from 'express';
+import ensureLoggedIn from 'connect-ensure-login';
 
 // Top-level page router
 const router = new express.Router();

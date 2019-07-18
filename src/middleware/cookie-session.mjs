@@ -1,13 +1,16 @@
-import session from 'client-sessions';
+import cookieSession from 'cookie-session';
+import config from '../config.js'
 
 // Support cookie sessions
-const middleware = session({
-  cookieName: 'session',
-
-  // Maximum 24 hour expiry (sliding 7 hour extension)
-  duration: 24 * 60 * 60 * 1000,
-  activeDuration: 7 * 60 * 60 * 1000,
-  secret: 'CHANGE ME',
+const middleware = cookieSession({
+  name: 'session',
+  keys: [config.sessionSecret],
+  maxAge: 60 * 60 * 1000,
+  secure: config.https,
+  httpOnly: true,
+  signed: true,
+  overwrite: true,
+  sameSite: 'lax',
 });
 
 // Export as middleware

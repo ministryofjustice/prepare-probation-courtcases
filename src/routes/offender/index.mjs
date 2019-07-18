@@ -1,5 +1,5 @@
 import express from 'express';
-
+import ensureLoggedIn from 'connect-ensure-login';
 import logger from '../../../log.js';
 
 // Top-level page router

@@ -20,7 +20,7 @@ module.exports = {
             "./src/public/**/*",
             "./tasks/**/*",
             "./gulpfile.esm.js",
-            ".config.mjs.mjs",
+            ".config.js.mjs.mjs",
           ],
         },
       ],
