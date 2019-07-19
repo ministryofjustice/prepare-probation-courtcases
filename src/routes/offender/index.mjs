@@ -1,5 +1,4 @@
 import express from 'express';
-import ensureLoggedIn from 'connect-ensure-login';
 import logger from '../../../log.js';
 
 // Top-level page router
@@ -10,7 +9,6 @@ router.get('/', async (req, res) => {
   res.render('offender/views/offender');
   logger.info('/offender');
 });
-
 
 // Export as router
 export default router;

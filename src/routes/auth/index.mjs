@@ -1,7 +1,5 @@
 import express from 'express';
 import passport from 'passport';
-import config from '../../config.js';
-
 
 // Top-level page router
 const router = new express.Router();

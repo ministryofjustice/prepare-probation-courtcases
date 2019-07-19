@@ -2,10 +2,9 @@ import passport from 'passport';
 import app from './index.mjs';
 import * as routes from './routes/index.mjs';
 import config from './config.js';
+// eslint-disable-next-line no-unused-vars
 import auth from './authentication/auth.js';
-
-const { authenticationMiddleware } = auth;
-
+import healthcheck from './services/healthcheck.js'
 
 // token refresh
 app.use(async (req, res, next) => {
@@ -26,6 +25,26 @@ app.use((req, res, next) => {
   next()
 })
 
+// eslint-disable-next-line consistent-return
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/login')
+}
+
+// healthcheck route
+app.get('/health', (req, res, next) => {
+  healthcheck((err, result) => {
+    if (err) {
+      return next(err)
+    }
+    if (!result.healthy) {
+      res.status(503)
+    }
+    res.json(result)
+    return result
+  })
+})
+
 const authLogoutUrl = `${config.delius.authExternalUrl}/logout?client_id=${config.delius.apiClientId}&redirect_uri=${config.domain}`
 
 app.get('/autherror', (req, res) => {
@@ -35,10 +54,8 @@ app.get('/autherror', (req, res) => {
   })
 })
 
-app.get('/login', passport.authenticate('oauth2', {
-  session: true,
-  successReturnToOrRedirect: '/',
-}));
+// Passport routes
+app.get('/login', passport.authenticate('oauth2'))
 
 app.get('/login/callback', (req, res, next) => passport.authenticate('oauth2', {
   successReturnToOrRedirect: req.session.returnTo || '/',
@@ -52,14 +69,14 @@ app.use('/logout', (req, res) => {
   res.redirect(authLogoutUrl)
 })
 
-// app.get('/', passport.authenticate('oauth2'));
+app.use(ensureAuthenticated);
 
 // Add top-level routes
-app.use(routes.list, authenticationMiddleware);
+app.use(routes.list);
 
 // Add nested routes
-// app.use('/login', routes.auth, authenticationMiddleware);
-app.use('/offender', routes.offender, authenticationMiddleware);
+
+app.use('/offender', routes.offender);
 
 // Start on port
 app.listen(config.port);

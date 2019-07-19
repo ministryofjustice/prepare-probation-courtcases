@@ -38,7 +38,6 @@ passport.use(new OAuth2Strategy(
     customHeaders: { Authorization: generateOauthClientToken() },
   }, (accessToken, refreshToken, params, profile, done) => {
     log.info(accessToken)
-    log.info(refreshToken)
     return done(null, profile)
   }
 ))
