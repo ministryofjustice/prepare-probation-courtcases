@@ -31,3 +31,14 @@ spec:
               value: '3000'
             - name: AUTH_DOMAIN
               value: 'https://prepare-probation-courtcases.apps.live-1.cloud-platform.service.justice.gov.uk'
+            - name: DELIUS_AUTH_URL
+              value: 'https://delius-oauth2.apps.live-1.cloud-platform.service.justice.gov.uk/auth'
+            - name: API_CLIENT_ID
+              value: 'probation_in_court'
+            - name: API_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: prepare-probation-courtcases-secret
+                  key: api-client-secret
+
+
