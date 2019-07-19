@@ -29,3 +29,5 @@ spec:
           env:
             - name: PORT
               value: '3000'
+            - name: AUTH_DOMAIN
+              value: 'https://prepare-probation-courtcases.apps.live-1.cloud-platform.service.justice.gov.uk'
