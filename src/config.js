@@ -21,5 +21,5 @@ module.exports = {
     apiClientId: get('API_CLIENT_ID', 'probation_in_court'),
     apiClientSecret: get('API_CLIENT_SECRET', 'clientsecret'),
   },
-  domain: `${get('INGRESS_URL', 'http://localhost:3000', true)}`,
+  domain: `${get('https:prepare-probation-courtcases.apps.live-1.cloud-platform.service.justice.gov.uk', 'http://localhost:3000', true)}`,
 };
