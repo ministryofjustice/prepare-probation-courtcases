@@ -6,6 +6,14 @@ import config from './config.js';
 import auth from './authentication/auth.js';
 import healthcheck from './services/healthcheck.js'
 
+
+function addTemplateVariables(req, res, next) {
+  res.locals.user = req.user
+  next()
+}
+
+app.use(addTemplateVariables)
+
 // token refresh
 app.use(async (req, res, next) => {
   if (req.user) {

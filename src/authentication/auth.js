@@ -1,8 +1,9 @@
 const passport = require('passport')
 const OAuth2Strategy = require('passport-oauth2').Strategy
 const config = require('../config.js')
-const { generateOauthClientToken } = require('./oauth')
+const { generateOauthClientToken } = require('./oauth.js')
 const log = require('../../log.js');
+const signInService = require('./signInService.js')
 
 function authenticationMiddleware() {
   // eslint-disable-next-line
@@ -37,8 +38,11 @@ passport.use(new OAuth2Strategy(
     state: true,
     customHeaders: { Authorization: generateOauthClientToken() },
   }, (accessToken, refreshToken, params, profile, done) => {
-    log.info(accessToken)
-    return done(null, profile)
+    const user = signInService.getUser(accessToken, refreshToken, params.expires_in,
+      params.user_name)
+    log.info(params)
+
+    return done(null, user)
   }
 ))
 

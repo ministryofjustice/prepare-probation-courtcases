@@ -16,6 +16,10 @@ module.exports = {
   port: 3000,
   sessionSecret: get('SESSION_SECRET', 'app-insecure-default-session', { requireInProduction: true }),
   delius: {
+    timeout: {
+      response: 30000,
+      deadline: 35000,
+    },
     authUrl: get('DELIUS_AUTH_URL', 'https://delius-oauth2.apps.live-1.cloud-platform.service.justice.gov.uk/auth'),
     authExternalUrl: get('DELIUS_AUTH_EXTERNAL_URL', get('DELIUS_AUTH_URL', 'https://delius-oauth2.apps.live-1.cloud-platform.service.justice.gov.uk/auth')),
     apiClientId: get('API_CLIENT_ID', 'probation_in_court'),
