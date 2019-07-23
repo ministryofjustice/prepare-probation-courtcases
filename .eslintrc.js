@@ -9,7 +9,7 @@ module.exports = {
   rules: {
       "no-use-before-define": 0,
       "semi": 0,
-      "comma-dangle": ["error.njk", "always-multiline"],
+      "comma-dangle": ["error", "always-multiline"],
       'import/extensions': [
         '.js',
         '.mjs',
