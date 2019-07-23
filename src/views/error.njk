@@ -1,0 +1,20 @@
+{% set mainClasses = 'govuk-!-width-two-thirds' %}
+{% extends "./templates/layoutError.njk" %}
+{% from "back-link/macro.njk" import govukBackLink %}
+{% from "error-summary/macro.njk" import govukErrorSummary %}
+
+{% block content %}
+
+  {{ govukBackLink({
+    text: "Back",
+    href: "/logout"
+  }) }}
+
+  {{ govukErrorSummary({
+    titleText: message,
+    descriptionText: 'status ' + error.status if error.status
+  }) }}
+
+{#  <pre>{{ error.stack }}</pre>#}
+
+{% endblock %}

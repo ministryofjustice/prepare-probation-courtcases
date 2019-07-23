@@ -35,7 +35,7 @@ export default (config, gulp) => {
 
     // Process Sass
     .pipe(sass(options.sass)
-      .on('error', sass.logError))
+      .on('error.njk', sass.logError))
 
     // Process PostCSS
     .pipe(postcss([
