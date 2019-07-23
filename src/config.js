@@ -24,7 +24,7 @@ module.exports = {
     authExternalUrl: get('DELIUS_AUTH_EXTERNAL_URL', get('DELIUS_AUTH_URL', 'https://delius-oauth2.apps.live-1.cloud-platform.service.justice.gov.uk/auth')),
     apiClientId: get('API_CLIENT_ID', 'probation_in_court'),
     apiClientSecret: get('API_CLIENT_SECRET', 'clientsecret'),
-    role: 'ROLE_RRBT001'
+    role: 'ROLE_RRBT001',
   },
   domain: `${get('AUTH_DOMAIN', 'http://localhost:3000', true)}`,
 };

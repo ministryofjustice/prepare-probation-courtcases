@@ -11,7 +11,6 @@ import log from '../log.js';
 const production = process.env.NODE_ENV === 'production'
 
 
-
 function addTemplateVariables(req, res, next) {
   res.locals.user = req.user
   next()
@@ -148,5 +147,3 @@ function renderErrors(error, req, res, next) {
 
   res.render('error')
 }
-
-
