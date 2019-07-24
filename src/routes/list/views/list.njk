@@ -5,12 +5,36 @@
     <div class="govuk-grid-column-full">
 
       <h1 class="govuk-heading-xl">
-        Sheffield Magistrates Court
+        {{courtHouse}}
       </h1>
 
-      <p class="govuk-body">Wednesday, 24th July 2019</p>
+      <p class="govuk-body">{{dateOfAppearance}}</p>
 
       {% from "table/macro.njk" import govukTable %}
+      {% set rows = [] %}
+
+      {% for case in cases %}
+       {% set rows = (rows.push(          [
+         {
+           html:   '<a href="/offender">$NAME</a>' | replace("$NAME", case.defendant.name)
+         },
+         {
+           text: case.offences[0].title
+         },
+         {
+           text: case.delius.status
+         },
+         {
+           text: case.listingNumber
+         },
+         {
+           text: case.session.startTime
+         },
+         {
+           text: case.session.courtRoom
+         }
+       ]), rows) %}
+      {% endfor %}
 
       {{ govukTable({
         firstCellIsHeader: false,
@@ -24,17 +48,17 @@
             classes: 'govuk-!-width-one-quarter'
           },
           {
+            text: "Delius record",
+            classes: 'govuk-!-width-one-quarter'
+
+          },
+          {
             text: "Status",
             classes: 'govuk-!-width-one-quarter'
 
           },
           {
-            text: "Marker",
-            classes: 'govuk-!-width-one-quarter'
-
-          },
-          {
-            text: "Appearance",
+            text: "Sitting",
             classes: 'govuk-!-width-one-quarter'
 
           },
@@ -42,68 +66,11 @@
             text: "Court",
             classes: 'govuk-!-width-one-quarter'
 
-          },
-          {
-            text: "Select",
-            classes: 'govuk-!-width-one-quarter'
-
           }
         ],
-        rows: [
-          [
-            {
-              html: '<a href="/offender">Smith, John</a>'
-            },
-            {
-              text: "Assault by beating"
-            },
-            {
-              html: '<div class="status-current">CURRENT</div>'
-            },
-            {
-              text: "Domestic violence"
-            },
-            {
-              text: "1"
-            },
-            {
-              text: "2"
-            },
-            {
-              html: '<div class="govuk-checkboxes__item">
-        <input class="govuk-checkboxes__input" id="offender" name="offender" type="checkbox" value="selected_offender">
-        <label class="govuk-label govuk-checkboxes__label" for="offender">
-        </label> </div>'
-            }
-          ],
-          [
-            {
-              html: '<a href=/offender>Jones, Paul</a>'
-            },
-            {
-              text: "Robbery of goods over £500"
-            },
-            {
-              html: '<div class="status-no-match">NO MATCH</div>'
-            },
-            {
-              text: "Violent"
-            },
-            {
-              text: "1"
-            },
-            {
-              text: "2"
-            },
-            {
-              html: '<div class="govuk-checkboxes__item">
-        <input class="govuk-checkboxes__input" id="offender" onclick="checkOnlyOne(this.value);" name="offender" type="checkbox" value="selected_offender">
-        <label class="govuk-label govuk-checkboxes__label" for="offender">
-        </label> </div>'
-            }
-          ]
-        ]
-      }) }}
+        rows: rows
+      })
+      }}
 
 
 
