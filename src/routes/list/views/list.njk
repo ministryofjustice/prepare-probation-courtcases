@@ -14,24 +14,33 @@
       {% set rows = [] %}
 
       {% for case in cases %}
+      {% set offences %}
+          <ol>
+              {% for offence in case.offences %}
+                  <li>{{ offence.title }}</li>
+              {% else %}
+                  <li>No offences</li>
+              {% endfor %}
+          </ol>
+      {% endset %}
        {% set rows = (rows.push(          [
          {
            html:   '<a href="/offender">$NAME</a>' | replace("$NAME", case.defendant.name)
          },
          {
-           text: case.offences[0].title
+             html: offences
          },
          {
            text: case.delius.status
          },
          {
-           text: case.listingNumber
+           text: case.listingNumber + ' listing'
          },
          {
-           text: case.session.startTime
+           text: case.session.startTime.slice(0, -3) + '-' + case.session.endTime.slice(0, -3)
          },
          {
-           text: case.session.courtRoom
+           text: case.session.courtRoom | int
          }
        ]), rows) %}
       {% endfor %}
@@ -71,11 +80,6 @@
         rows: rows
       })
       }}
-
-
-
-
-
     </div>
   </div>
 {% endblock %}

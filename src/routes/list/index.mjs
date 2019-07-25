@@ -1,58 +1,54 @@
 import express from 'express';
+import courtList from '../../services/courtList'
+import logger from '../../../log'
 
 // Top-level page router
 const router = new express.Router();
 
 // Home page
 router.get('/', async (req, res) => {
-  const data = {
-    courtHouse: 'Sheffield Magistrates Court',
-    dateOfAppearance: 'Wednesday, 24th July 2019',
-    cases: [
-      {
-        listingNumber: 3,
-        blockDescription: '10:00-10:30',
-        defendant: {
-          name: 'John Smith',
-        },
-        offences: [
-          {
-            title: 'Assault by beating',
-          },
-        ],
-        delius: {
-          status: 'Current (nps)',
-        },
-        session: {
-          courtRoom: '2',
-          startTime: '10:00',
-          endTime: '10:30',
-        },
-      },
-      {
-        listingNumber: 2,
-        blockDescription: '10:00-10:30',
-        defendant: {
-          name: 'Micky Smith',
-        },
-        offences: [
-          {
-            title: 'Assault by beating',
-          },
-        ],
-        delius: {
-          status: 'Known',
-        },
-        session: {
-          courtRoom: '1',
-          startTime: '10:20',
-          endTime: '10:40',
-        },
-      },
-    ],
-  };
-  res.render('list/views/list', data);
+  courtList(
+    '2019-07-19',
+    'Sheffield Magistrates\' Court',
+    (list) => {
+      logger.info(list)
+      res.render('list/views/list', {
+        courtHouse: list.courtName,
+        dateOfAppearance: 'Friday, 19th July 2019',
+        cases: flattenCases(list.sessions),
+      });
+    },
+    (error) => {
+      logger.error(error)
+      res.render('error', { error, message: 'Unable to retrieve court list' })
+    }
+  )
 });
 
+const flattenCases = (sessions) => {
+  const allCases = [];
+
+  sessions.forEach((session) => {
+    session.blocks.forEach((block) => {
+      allCases.push(
+        ...block.cases.map(aCase => Object.assign({}, aCase, {
+          session,
+          block,
+          delius: randomDeliusStatus(),
+        }))
+      )
+    })
+  })
+  return allCases;
+}
+
+
+const randomDeliusStatus = () => {
+  const rand = Math.random();
+  return ({
+    // eslint-disable-next-line no-nested-ternary
+    status: rand > 0.3 ? 'Not known' : rand > 0.25 ? 'Current (crc)' : rand > 0.2 ? 'Current (nps)' : 'Known',
+  })
+}
 // Export as router
 export default router;
