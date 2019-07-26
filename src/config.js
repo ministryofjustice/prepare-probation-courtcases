@@ -26,5 +26,10 @@ module.exports = {
     apiClientSecret: get('API_CLIENT_SECRET', 'clientsecret'),
     role: 'ROLE_CDBT001',
   },
+  apis: {
+    courtList: {
+      url: get('COURT_LIST_URL', 'https://court-list-service.apps.live-1.cloud-platform.service.justice.gov.uk'),
+    },
+  },
   domain: `${get('AUTH_DOMAIN', 'http://localhost:3000', true)}`,
 };

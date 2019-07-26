@@ -40,5 +40,8 @@ spec:
                 secretKeyRef:
                   name: prepare-probation-courtcases-secret
                   key: api-client-secret
+            - name: COURT_LIST_URL
+              value: 'http://court-list-service:8000'
+
 
 
