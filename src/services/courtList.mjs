@@ -1,5 +1,5 @@
 import request from 'superagent'
-import config from '../config'
+import config from '../config.js'
 
 const apiUrl = config.apis.courtList.url
 
