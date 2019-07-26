@@ -89,7 +89,7 @@
     "prettier": "^1.18.2",
     "superagent": "^5.1.0",
     "supertest": "^4.0.2",
-    "moment": "latest"
+    "moment": "^2.24.0"
   },
   "browserslist": [
     ">0.1%",
