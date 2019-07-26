@@ -1,4 +1,5 @@
 import express from 'express';
+import moment from 'moment'
 import courtList from '../../services/courtList'
 import logger from '../../../log'
 
@@ -7,22 +8,19 @@ const router = new express.Router();
 
 // Home page
 router.get('/', async (req, res) => {
-  courtList(
-    '2019-07-19',
-    'Sheffield Magistrates\' Court',
-    (list) => {
-      logger.info(list)
-      res.render('list/views/list', {
-        courtHouse: list.courtName,
-        dateOfAppearance: 'Friday, 19th July 2019',
-        cases: flattenCases(list.sessions),
-      });
-    },
-    (error) => {
-      logger.error(error)
-      res.render('error', { error, message: 'Unable to retrieve court list' })
-    }
-  )
+  try {
+    const { token } = req.session.passport.user
+    const list = await courtList('2019-07-19', 'Sheffield Magistrates\' Court', token)
+    logger.info(`Retrieved court list for ${list.courtHouse} on ${list.dateOfAppearance}`)
+    res.render('list/views/list', {
+      courtHouse: list.courtHouse,
+      dateOfAppearance: moment(list.dateOfAppearance, 'YYYY-MM-DD').format('dddd, Do MMMM YYYY'),
+      cases: flattenCases(list.sessions),
+    });
+  } catch (error) {
+    logger.error(error)
+    res.render('error', { error, message: 'Unable to retrieve court list' })
+  }
 });
 
 const flattenCases = (sessions) => {
@@ -31,7 +29,8 @@ const flattenCases = (sessions) => {
   sessions.forEach((session) => {
     session.blocks.forEach((block) => {
       allCases.push(
-        ...block.cases.map(aCase => Object.assign({}, aCase, {
+        ...block.cases.map(aCase => ({
+          ...aCase,
           session,
           block,
           delius: randomDeliusStatus(),
