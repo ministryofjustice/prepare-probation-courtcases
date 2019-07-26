@@ -1,6 +1,6 @@
 import express from 'express';
 import moment from 'moment'
-import courtList from '../../services/courtList'
+import courtList from '../../services/courtList.mjs'
 import logger from '../../../log'
 
 // Top-level page router
