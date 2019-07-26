@@ -1,7 +1,7 @@
 import express from 'express';
 import moment from 'moment'
 import courtList from '../../services/courtList.mjs'
-import logger from '../../../log'
+import logger from '../../../log.js'
 
 // Top-level page router
 const router = new express.Router();
